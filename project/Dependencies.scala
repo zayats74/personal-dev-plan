@@ -20,7 +20,13 @@ object Dependencies {
 
   object iron {
     private val version = "3.2.1"
-    val core            = "io.github.iltotore" %% "iron" % version
+    val core            = "io.github.iltotore" %% "iron"            % version
+    val pureconfig      = "io.github.iltotore" %% "iron-pureconfig" % version
+  }
+
+  object pureconfig {
+    private val version = "0.17.9"
+    val core            = "com.github.pureconfig" %% "pureconfig-core" % version
   }
 
   val pdpLibs: Seq[ModuleID] =
@@ -28,7 +34,9 @@ object Dependencies {
       cats.core,
       cats.effect,
       cats.effectKernel,
-      iron.core
+      iron.core,
+      iron.pureconfig,
+      pureconfig.core
     )
 
   val testLibs: Seq[ModuleID] =

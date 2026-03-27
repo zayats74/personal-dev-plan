@@ -18,11 +18,17 @@ object Dependencies {
     val cats = "com.disneystreaming" %% "weaver-cats" % version
   }
 
+  object iron {
+    private val version = "3.2.1"
+    val core            = "io.github.iltotore" %% "iron" % version
+  }
+
   val pdpLibs: Seq[ModuleID] =
     Seq(
       cats.core,
       cats.effect,
-      cats.effectKernel
+      cats.effectKernel,
+      iron.core
     )
 
   val testLibs: Seq[ModuleID] =

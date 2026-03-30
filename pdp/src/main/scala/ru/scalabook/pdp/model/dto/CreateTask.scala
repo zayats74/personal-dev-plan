@@ -1,23 +1,25 @@
-package ru.scalabook.pdp.model
+package ru.scalabook.pdp.model.dto
 
-import ru.scalabook.pdp.model.Goal.GoalId
-import ru.scalabook.pdp.model.Section.SectionId
-import ru.scalabook.pdp.model.UserType.UserTypeId
-import ru.scalabook.pdp.model.enums.TaskType.{
-  Article,
-  Book,
-  Course,
-  Custom,
-  Podcast,
-  Video
-}
+import ru.scalabook.pdp.model.entity.Goal.GoalId
+import ru.scalabook.pdp.model.entity.Section.SectionId
+import ru.scalabook.pdp.model.entity.UserType.UserTypeId
 import ru.scalabook.pdp.model.enums.{TaskStatus, TaskType}
+import ru.scalabook.pdp.model.{
+  Authors,
+  Episodes,
+  Link,
+  Ordinal,
+  Pages,
+  Platform,
+  TaskName,
+  TaskStep,
+  UserId
+}
 
 import java.time.LocalDate
-import scala.concurrent.duration.{FiniteDuration, MILLISECONDS}
+import scala.concurrent.duration.FiniteDuration
 
-sealed trait Task:
-  val id: TaskId
+sealed trait CreateTask:
   val name: TaskName
   val userId: UserId
   val taskType: TaskType
@@ -27,10 +29,10 @@ sealed trait Task:
   val ordinal: Ordinal
   val startDate: Option[LocalDate]
   val endDate: Option[LocalDate]
+  val information: String
   val plan: List[TaskStep]
 
-final case class BookTask(
-    id: TaskId,
+final case class CreateBookTask(
     name: TaskName,
     userId: UserId,
     taskStatus: TaskStatus,
@@ -43,11 +45,10 @@ final case class BookTask(
     plan: List[TaskStep],
     authors: Authors,
     pages: Pages
-) extends Task:
-  val taskType: TaskType = Book
+) extends CreateTask:
+  val taskType: TaskType = TaskType.Book
 
-final case class ArticleTask(
-    id: TaskId,
+final case class CreateArticleTask(
     name: TaskName,
     userId: UserId,
     taskStatus: TaskStatus,
@@ -61,11 +62,10 @@ final case class ArticleTask(
     authors: Authors,
     link: Link,
     duration: FiniteDuration
-) extends Task:
-  val taskType: TaskType = Article
+) extends CreateTask:
+  val taskType: TaskType = TaskType.Article
 
-final case class PodcastTask(
-    id: TaskId,
+final case class CreatePodcastTask(
     name: TaskName,
     userId: UserId,
     taskStatus: TaskStatus,
@@ -80,16 +80,10 @@ final case class PodcastTask(
     link: Link,
     episodes: Episodes,
     episodeDuration: FiniteDuration
-) extends Task:
-  val taskType: TaskType = Podcast
+) extends CreateTask:
+  val taskType: TaskType = TaskType.Podcast
 
-  def duration: FiniteDuration =
-    val ms = episodeDuration.toMillis * episodes.value.toLong
-    FiniteDuration(ms, MILLISECONDS)
-end PodcastTask
-
-final case class VideoTask(
-    id: TaskId,
+final case class CreateVideoTask(
     name: TaskName,
     userId: UserId,
     taskStatus: TaskStatus,
@@ -104,11 +98,10 @@ final case class VideoTask(
     platform: Platform,
     link: Link,
     duration: FiniteDuration
-) extends Task:
-  val taskType: TaskType = Video
+) extends CreateTask:
+  val taskType: TaskType = TaskType.Video
 
-final case class CourseTask(
-    id: TaskId,
+final case class CreateCourseTask(
     name: TaskName,
     userId: UserId,
     taskStatus: TaskStatus,
@@ -123,11 +116,10 @@ final case class CourseTask(
     platform: Platform,
     link: Link,
     duration: FiniteDuration
-) extends Task:
-  val taskType: TaskType = Course
+) extends CreateTask:
+  val taskType: TaskType = TaskType.Course
 
-final case class UserTask(
-    id: TaskId,
+final case class CreateUserTypeTask(
     name: TaskName,
     userId: UserId,
     userTypeId: UserTypeId,
@@ -140,5 +132,5 @@ final case class UserTask(
     information: String,
     plan: List[TaskStep],
     duration: FiniteDuration
-) extends Task:
-  val taskType: TaskType = Custom
+) extends CreateTask:
+  val taskType: TaskType = TaskType.Custom

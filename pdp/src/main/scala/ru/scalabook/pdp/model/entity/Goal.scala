@@ -1,9 +1,10 @@
-package ru.scalabook.pdp.model
+package ru.scalabook.pdp.model.entity
 
 import io.github.iltotore.iron.RefinedType
 import io.github.iltotore.iron.constraint.all.{MaxLength, MinLength, Trimmed}
 import io.github.iltotore.iron.constraint.numeric.GreaterEqual
-import ru.scalabook.pdp.model.Goal.*
+import Goal.*
+import ru.scalabook.pdp.model.{Ordinal, UserId}
 
 final case class Goal(
     id: GoalId,

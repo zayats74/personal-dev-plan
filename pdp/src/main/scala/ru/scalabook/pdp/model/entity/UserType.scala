@@ -1,5 +1,6 @@
-package ru.scalabook.pdp.model
+package ru.scalabook.pdp.model.entity
 
+import ru.scalabook.pdp.model.{Ordinal, UserId}
 import io.github.iltotore.iron.RefinedType
 import io.github.iltotore.iron.constraint.all.{
   GreaterEqual,
@@ -7,7 +8,7 @@ import io.github.iltotore.iron.constraint.all.{
   MinLength,
   Trimmed
 }
-import ru.scalabook.pdp.model.UserType.*
+import UserType.*
 
 final case class UserType(
     id: UserTypeId,

@@ -1,9 +1,10 @@
-package ru.scalabook.pdp.model
+package ru.scalabook.pdp.model.entity
 
 import io.github.iltotore.iron.RefinedType
 import io.github.iltotore.iron.constraint.all.{MaxLength, MinLength, Trimmed}
 import io.github.iltotore.iron.constraint.numeric.GreaterEqual
-import ru.scalabook.pdp.model.Section.*
+import Section.*
+import ru.scalabook.pdp.model.{Ordinal, UserId}
 
 final case class Section(
     id: SectionId,

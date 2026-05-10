@@ -22,11 +22,35 @@ object Dependencies {
     private val version = "3.2.1"
     val core            = "io.github.iltotore" %% "iron"            % version
     val pureconfig      = "io.github.iltotore" %% "iron-pureconfig" % version
+    val doobie          = "io.github.iltotore" %% "iron-doobie"     % version
   }
 
   object pureconfig {
     private val version = "0.17.9"
     val core            = "com.github.pureconfig" %% "pureconfig-core" % version
+  }
+
+  object doobie {
+    private val version = "1.0.0-RC10"
+    val core            = "org.tpolecat" %% "doobie-core"     % version
+    val free            = "org.tpolecat" %% "doobie-free"     % version
+    val postgres        = "org.tpolecat" %% "doobie-postgres" % version
+    val hikari          = "org.tpolecat" %% "doobie-hikari"   % version
+  }
+
+  object flyway {
+    private val version = "9.16.0"
+    val core            = "org.flywaydb" % "flyway-core" % version
+  }
+
+  object postgres {
+    private val version = "42.7.1"
+    val postgresql      = "org.postgresql" % "postgresql" % version
+  }
+
+  object cdimascio {
+    private val version = "3.0.0"
+    val env             = "io.github.cdimascio" % "dotenv-java" % version
   }
 
   val pdpLibs: Seq[ModuleID] =
@@ -36,7 +60,15 @@ object Dependencies {
       cats.effectKernel,
       iron.core,
       iron.pureconfig,
-      pureconfig.core
+      iron.doobie,
+      pureconfig.core,
+      doobie.core,
+      doobie.free,
+      doobie.postgres,
+      doobie.hikari,
+      flyway.core,
+      postgres.postgresql,
+      cdimascio.env
     )
 
   val testLibs: Seq[ModuleID] =

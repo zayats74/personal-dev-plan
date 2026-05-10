@@ -35,6 +35,7 @@ object Dependencies {
     val core            = "org.tpolecat" %% "doobie-core"     % version
     val free            = "org.tpolecat" %% "doobie-free"     % version
     val postgres        = "org.tpolecat" %% "doobie-postgres" % version
+    val hikari          = "org.tpolecat" %% "doobie-hikari"   % version
   }
 
   object flyway {
@@ -45,6 +46,11 @@ object Dependencies {
   object postgres {
     private val version = "42.7.1"
     val postgresql      = "org.postgresql" % "postgresql" % version
+  }
+
+  object cdimascio {
+    private val version = "3.0.0"
+    val env             = "io.github.cdimascio" % "dotenv-java" % version
   }
 
   val pdpLibs: Seq[ModuleID] =
@@ -59,8 +65,10 @@ object Dependencies {
       doobie.core,
       doobie.free,
       doobie.postgres,
+      doobie.hikari,
       flyway.core,
-      postgres.postgresql
+      postgres.postgresql,
+      cdimascio.env
     )
 
   val testLibs: Seq[ModuleID] =
